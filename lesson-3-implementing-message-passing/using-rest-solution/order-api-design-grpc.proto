@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+enum OrderStatus {
+  PENDING = 0;
+  COMPLETED = 1;
+}
+
+message Order {
+  int64 order_id = 1;
+  User ordered_by = 2;
+  OrderStatus status = 3;
+  int64 ordered_at = 4;
+  repeated Item items = 5;
+}
+
+message CreateOrder {
+  User ordered_by = 2;
+  repeated Item items = 5;
+}
+
+message User {
+  int64 user_id = 1;
+  string name = 2;
+}
+
+message Item {
+  int64 item_id = 1;
+  string name = 2;
+}
+
+message OrderFilterOptions {
+
+}
+
+service OrderService {
+  rpc create(CreateOrder) returns (Order);
+  rpc get(OrderFilterOptions) returns (stream Order);
+}
