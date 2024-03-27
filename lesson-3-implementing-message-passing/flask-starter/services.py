@@ -1,4 +1,4 @@
-from .enums import Status
+from enums import Status
 
 
 def create_order(order_data):
